@@ -1,0 +1,25 @@
+{
+  "name": "templates",
+  "version": "1.0.0",
+  "description": "Starter templates for designing nodeJS  api using expressjs",
+  "main": "index.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+  "start":"node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saurabhmehta1601/nodejs-express-template.git"
+  },
+  "keywords": [],
+  "author": "Saurabh Mehta <saurabhmehta1601@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saurabhmehta1601/nodejs-express-template/issues"
+  },
+  "homepage": "https://github.com/saurabhmehta1601/nodejs-express-template#readme"
+}
