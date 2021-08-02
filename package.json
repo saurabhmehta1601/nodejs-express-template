@@ -1,7 +1,7 @@
 {
   "name": "templates",
   "version": "1.0.0",
-  "description": "Starter templates for designing nodeJS  api using expressjs",
+  "description": "Starter template for designing nodeJS  api using expressjs",
   "main": "index.js",
   "dependencies": {
     "cors": "^2.8.5",
