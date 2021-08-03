@@ -12,6 +12,7 @@ app.get("/", (_req, res) => {
   res.end();
 });
 
+
 connectDb().then(()=>{
   console.info(`> MongoDB connection successfull.`);
 
