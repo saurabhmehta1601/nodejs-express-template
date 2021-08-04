@@ -7,9 +7,14 @@ config()
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+if(process.env.NODE_ENV === "development"){
+  // app.use(errorHandler)
+}
+
+
 app.get("/", (_req, res) => {
+  throw new Error("som error")
   res.send(`hello `);
-  res.end();
 });
 
 
@@ -19,7 +24,10 @@ connectDb().then(()=>{
   app.listen(PORT, () => {
   console.info(`> Express api running on port ${PORT}`);
 });
+
 }).catch((e :Error )=>{
   console.error(e.message);  
 })
+
+
 
