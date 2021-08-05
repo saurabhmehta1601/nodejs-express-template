@@ -46,7 +46,7 @@ userSchema.pre("save", function save(next) {
   if (!this.isModified("password")) {
     return next();
   }
-    bcrypt.hash(this.password, 10 , (err: Error, hash) => {
+    bcrypt.hash(this.password, 10 , (err: Error | undefined, hash) => {
       if (err) {
         return next(err);
       }

@@ -5,5 +5,5 @@ export const createOne = async (model: mongoose.Model<any> , payload: any ) : Pr
 }
 
 export const findOne = async (model: mongoose.Model<any> , id: mongoose.Schema.Types.ObjectId   ) : Promise<any> =>{
-    return model.findById(id)
+    return model.findById(id).lean().exec()
 }

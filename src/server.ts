@@ -26,7 +26,8 @@ connectDb().then(()=>{
 });
 
 }).catch((e :Error )=>{
-  console.error(e.message);  
+  console.error("MongoError name => " ,e.name);  
+  console.error("MongoError message => " ,e.message);  
 })
 
 
