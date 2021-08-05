@@ -12,6 +12,7 @@ export const connect = async () :Promise<void> => {
   const mongooseOpts = {
     useNewUrlParser: true,
     useUnifiedTopology:true,
+    createIndexes: true
   };
   mongoose.connect(uri, mongooseOpts);
 };

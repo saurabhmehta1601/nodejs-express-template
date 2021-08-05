@@ -4,9 +4,9 @@ import { model, Schema } from "mongoose";
 
 enum Gender {Male,Female,Other} 
 
-type UserDocument = mongoose.Document & {
+export type UserDocument = mongoose.Document & {
   email: string,
-  hashedPassword:string,
+  password: string,
   profile? : {
     name:string,
     gender:Gender,
@@ -21,7 +21,7 @@ const userSchema = new Schema<UserDocument>(
       required: true,
       unique: [true, "User with account already exists."],
     },
-    hashedPassword: {
+    password: {
       type: String,
       required: true,
     },
@@ -46,11 +46,11 @@ userSchema.pre("save", function save(next) {
   if (!this.isModified("password")) {
     return next();
   }
-    bcrypt.hash(this.hashedPassword, 10 , (err: mongoose.Error, hash) => {
+    bcrypt.hash(this.password, 10 , (err: Error, hash) => {
       if (err) {
         return next(err);
       }
-      this.hashedPassword = hash;
+      this.password = hash;
       next();
     });
   });
