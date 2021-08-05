@@ -1,19 +1,17 @@
 import mongoose from "mongoose"
 import { MongoMemoryServer } from "mongodb-memory-server"
 
-const mongod = new MongoMemoryServer() as any;
+const mongod =  MongoMemoryServer.create();
 
 /**
  * Connect to the in-memory database.
  */
 export const connect = async () :Promise<void> => {
-  const uri = await mongod.getConnectionString();
+  const uri = (await mongod).getUri();
 
   const mongooseOpts = {
     useNewUrlParser: true,
-    autoReconnect: true,
-    reconnectTries: Number.MAX_VALUE,
-    reconnectInterval: 1000,
+    useUnifiedTopology:true,
   };
   mongoose.connect(uri, mongooseOpts);
 };
@@ -24,7 +22,7 @@ export const connect = async () :Promise<void> => {
 export const closeDatabase = async () :Promise<void> => {
   await mongoose.connection.dropDatabase();
   await mongoose.connection.close();
-  await mongod.stop();
+  await (await mongod).stop();
 };
 
 /**
