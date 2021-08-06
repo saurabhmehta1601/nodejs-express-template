@@ -26,6 +26,7 @@ const userSchema = new Schema<UserDocument>(
     email: {
       type: String,
       required: true,
+      test: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
       unique: [true, "User with account already exists."],
     },
     password: {

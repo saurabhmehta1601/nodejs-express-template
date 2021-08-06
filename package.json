@@ -20,6 +20,7 @@
     "@types/jest": "^26.0.24",
     "@types/jsonwebtoken": "^8.5.4",
     "@types/mongoose": "^5.11.97",
+    "@types/morgan": "^1.9.3",
     "@types/node": "^16.4.10",
     "@typescript-eslint/eslint-plugin": "^4.28.5",
     "@typescript-eslint/parser": "^4.28.5",
@@ -27,6 +28,7 @@
     "ghooks": "^2.0.4",
     "jest": "^27.0.6",
     "mongodb-memory-server": "^7.3.4",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.12",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.3.2",
@@ -35,16 +37,17 @@
     "typescript": "^4.3.5"
   },
   "scripts": {
-    "start": "npm run build && node dist/server.js",
-    "dev": "nodemon --exec ts-node src/server.ts",
+    "start": "cross-env NODE_ENV=production npm run build && node dist/server.js",
+    "dev": "cross-env NODE_ENV=development nodemon --exec ts-node src/server.ts",
     "prebuild": "rimraf dist",
     "build": "tsc",
     "watch:ts": "tsc --watch",
     "lint": "eslint \"src/**/*.ts\" --quiet --fix",
     "format": "prettier --write  \"src/**/*.ts\"",
-    "test": "cross-env NODE_ENV=testing jest --forceExit --detectOpenHandles  --silent ",
+    "test": "cross-env NODE_ENV=testing jest --forceExit --setupFiles dotenv/config --detectOpenHandles  --silent ",
     "test:controllers": "npm run test -t controllers",
     "test:middlewares": "npm run test -t middlewares",
+    "test:utils": "npm run test -t utils",
     "test:watch": "jest --watch"
   },
   "repository": {
