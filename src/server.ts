@@ -4,12 +4,12 @@ import express from "express";
 import morgan from "morgan";
 import { Error } from "mongoose";
 import apiRoutes from "./routes/api";
+
 config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 if (process.env.NODE_ENV !== "production") {
-  // app.use(errorHandler)
   app.use(morgan("dev"));
 }
 

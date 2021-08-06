@@ -65,4 +65,12 @@ userSchema.pre("save", function save(next) {
   });
 });
 
+userSchema.methods.comparePassword = function (plainPassword: string) {
+  try {
+    return bcrypt.compare(plainPassword, this.password);
+  } catch (e) {
+    throw new Error("Password cannot be compared");
+  }
+};
+
 export default model<UserDocument>("User", userSchema);
