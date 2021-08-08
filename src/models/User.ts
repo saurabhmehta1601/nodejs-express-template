@@ -39,7 +39,7 @@ export const userSchema = new Schema<UserDocument>(
         required: false,
       },
       gender: {
-        type: String ,
+        type: String,
         required: false,
         enum: Gender,
       },
@@ -61,10 +61,7 @@ userSchema.pre("save", function save(next) {
   });
 });
 
-userSchema.methods.comparePassword = function (
-  candidatePassword,
-  cb
-) {
+userSchema.methods.comparePassword = function (candidatePassword, cb) {
   bcrypt.compare(
     candidatePassword,
     this.password,

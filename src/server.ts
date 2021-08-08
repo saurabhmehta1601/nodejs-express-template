@@ -4,8 +4,8 @@ import express from "express";
 import morgan from "morgan";
 import { Error } from "mongoose";
 import apiRoutes from "./routes/api";
-import authMiddleware from "./middlewares/auth"
-import authRoutes from "./routes/auth"
+import authMiddleware from "./middlewares/auth";
+import authRoutes from "./routes/auth";
 
 config();
 const app = express();
@@ -20,20 +20,24 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // routes
-app.use("/auth",authRoutes)
+app.use("/auth", authRoutes);
 app.use("/api", authMiddleware, apiRoutes);
 
+export const serverListener = app.listen(PORT, () => {
+  console.info(`> Express api running on port ${PORT}`);
+});
 
+if(process.env.NODE_ENV !== "testing"){
 
-connectDb()
+  connectDb()
   .then(() => {
     console.info(`> MongoDB connection successfull.`);
-
-    app.listen(PORT, () => {
-      console.info(`> Express api running on port ${PORT}`);
-    });
   })
   .catch((e: Error) => {
     console.error("MongoError name => ", e.name);
     console.error("MongoError message => ", e.message);
   });
+
+}
+
+export default app;
