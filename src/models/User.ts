@@ -3,9 +3,9 @@ import mongoose from "mongoose";
 import { model, Schema } from "mongoose";
 
 enum Gender {
-  Male,
-  Female,
-  Other,
+  Male = "Male",
+  Female = "Female",
+  Other = "Other",
 }
 
 export type UserDocument = mongoose.Document & {
@@ -14,14 +14,14 @@ export type UserDocument = mongoose.Document & {
   profile?: {
     name: string;
     gender: Gender;
-    photoURL: string;
   };
   comparePassword: (
     password: string,
     cb: (err: any, isMatch: boolean) => void
   ) => boolean; //eslint-disable-line @typescript-eslint/no-explicit-any
 };
-const userSchema = new Schema<UserDocument>(
+
+export const userSchema = new Schema<UserDocument>(
   {
     email: {
       type: String,
@@ -39,13 +39,9 @@ const userSchema = new Schema<UserDocument>(
         required: false,
       },
       gender: {
-        type: String,
+        type: String ,
         required: false,
         enum: Gender,
-      },
-      photoURL: {
-        type: String,
-        required: false,
       },
     },
   },
@@ -65,12 +61,17 @@ userSchema.pre("save", function save(next) {
   });
 });
 
-userSchema.methods.comparePassword = function (plainPassword: string) {
-  try {
-    return bcrypt.compare(plainPassword, this.password);
-  } catch (e) {
-    throw new Error("Password cannot be compared");
-  }
+userSchema.methods.comparePassword = function (
+  candidatePassword,
+  cb
+) {
+  bcrypt.compare(
+    candidatePassword,
+    this.password,
+    (err: Error | undefined, isMatch: boolean) => {
+      cb(err, isMatch);
+    }
+  );
 };
 
 export default model<UserDocument>("User", userSchema);

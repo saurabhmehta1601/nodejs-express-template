@@ -3,4 +3,5 @@ export default  {
   testEnvironment: "node",
   testMatch: ["**/*.(test|spec).ts"],
   testPathIgnorePatterns: ["node_modules"],
+  silent:false
 };

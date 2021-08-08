@@ -13,6 +13,7 @@ export const connect = async (): Promise<void> => {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
+    useCreateIndex: true
   };
   mongoose.connect(uri, mongooseOpts);
 };
