@@ -52,7 +52,8 @@
     "test:utils": "npm run test -t utils",
     "test:routes": "npm run test -t routes",
     "test:models": "npm run test -t models",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "validate":"npm-run-all --parallel lint test format"
   },
   "repository": {
     "type": "git",
@@ -67,7 +68,7 @@
   "homepage": "https://github.com/saurabhmehta1601/nodejs-express-template#readme",
   "config": {
     "ghooks": {
-      "pre-commit": "npm-run-all --parallel lint format"
+      "pre-commit": "npm run validate "
     }
   }
 }
