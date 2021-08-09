@@ -1,9 +1,15 @@
+import { Server } from "http";
 import supertest from "supertest";
-import app, { serverListener } from "../../server";
+import app from "../../app";
 import * as dbHandler from "../../setupTests";
+
+
+let listener : undefined | Server  
 
 beforeAll(async () => {
   await dbHandler.connect();
+  listener =  app.listen(4000,() =>{console.log(">Test running on express server");
+  })
 });
 
 afterEach(async () => {
@@ -12,7 +18,7 @@ afterEach(async () => {
 
 afterAll(async () => {
   await dbHandler.closeDatabase();
-  serverListener.close();
+  listener?.close();
 });
 
 describe("POST /auth/register", () => {
