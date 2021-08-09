@@ -46,7 +46,7 @@
     "watch:ts": "tsc --watch",
     "lint": "eslint \"src/**/*.ts\" --quiet --fix",
     "format": "prettier --write  \"src/**/*.ts\"",
-    "test": "cross-env NODE_ENV=testing jest --forceExit --setupFiles dotenv/config --detectOpenHandles --testTimout=10000 ",
+    "test": "cross-env NODE_ENV=testing jest --forceExit --setupFiles dotenv/config --detectOpenHandles --testTimout=10001",
     "test:controllers": "npm run test -t controllers",
     "test:middlewares": "npm run test -t middlewares",
     "test:utils": "npm run test -t utils",

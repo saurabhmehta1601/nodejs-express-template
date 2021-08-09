@@ -3,5 +3,7 @@ export default  {
   testEnvironment: "node",
   testMatch: ["**/*.(test|spec).ts"],
   coveragePathIgnorePatterns: ["node_modules"],
-  silent:false
+  silent:false,
+  collectCoverage:true,
+  coverageReporters: ['json','html','text']
 };

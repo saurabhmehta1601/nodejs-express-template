@@ -27,17 +27,15 @@ export const serverListener = app.listen(PORT, () => {
   console.info(`> Express api running on port ${PORT}`);
 });
 
-if(process.env.NODE_ENV !== "testing"){
-
+if (process.env.NODE_ENV !== "testing") {
   connectDb()
-  .then(() => {
-    console.info(`> MongoDB connection successfull.`);
-  })
-  .catch((e: Error) => {
-    console.error("MongoError name => ", e.name);
-    console.error("MongoError message => ", e.message);
-  });
-
+    .then(() => {
+      console.info(`> MongoDB connection successfull.`);
+    })
+    .catch((e: Error) => {
+      console.error("MongoError name => ", e.name);
+      console.error("MongoError message => ", e.message);
+    });
 }
 
 export default app;
