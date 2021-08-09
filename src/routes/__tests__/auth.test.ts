@@ -3,13 +3,13 @@ import supertest from "supertest";
 import app from "../../app";
 import * as dbHandler from "../../setupTests";
 
-
-let listener : undefined | Server  
+let listener: undefined | Server;
 
 beforeAll(async () => {
   await dbHandler.connect();
-  listener =  app.listen(4000,() =>{console.log(">Test running on express server");
-  })
+  listener = app.listen(4000, () => {
+    console.log(">Test running on express server");
+  });
 });
 
 afterEach(async () => {

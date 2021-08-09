@@ -1,12 +1,12 @@
-import app from "./app"
+import app from "./app";
 import connectDb from "./utils/connectDb";
 import { Error } from "mongoose";
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT ,()=>{
-    console.log(">Express server running");
-    
-    connectDb()
+app.listen(PORT, () => {
+  console.log(">Express server running");
+
+  connectDb()
     .then(() => {
       console.info(`> MongoDB connection successfull.`);
     })
@@ -14,4 +14,4 @@ app.listen(PORT ,()=>{
       console.error("MongoError name => ", e.name);
       console.error("MongoError message => ", e.message);
     });
-})
+});
