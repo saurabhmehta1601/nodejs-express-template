@@ -61,7 +61,7 @@
   },
   "keywords": [],
   "author": "Saurabh Mehta <saurabhmehta1601@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/saurabhmehta1601/nodejs-express-template/issues"
   },
