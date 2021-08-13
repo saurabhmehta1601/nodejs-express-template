@@ -1,18 +1,19 @@
-import mongoose from "mongoose"
-import { MongoMemoryServer } from "mongodb-memory-server"
+import mongoose from "mongoose";
+import { MongoMemoryServer } from "mongodb-memory-server";
 
-const mongod =  MongoMemoryServer.create();
+const mongod = MongoMemoryServer.create();
 
 /**
  * Connect to the in-memory database.
  */
-export const connect = async () :Promise<void> => {
+export const connect = async (): Promise<void> => {
   const uri = (await mongod).getUri();
 
   const mongooseOpts = {
     useNewUrlParser: true,
-    useUnifiedTopology:true,
-    createIndexes: true
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
   };
   mongoose.connect(uri, mongooseOpts);
 };
@@ -20,7 +21,7 @@ export const connect = async () :Promise<void> => {
 /**
  * Drop in-memory database, close the connection and stop mongod.
  */
-export const closeDatabase = async () :Promise<void> => {
+export const closeDatabase = async (): Promise<void> => {
   await mongoose.connection.dropDatabase();
   await mongoose.connection.close();
   await (await mongod).stop();
@@ -29,7 +30,7 @@ export const closeDatabase = async () :Promise<void> => {
 /**
  * Remove all the data for all db collections inside in-memory database.
  */
-export const clearDatabase = async () :Promise<void> => {
+export const clearDatabase = async (): Promise<void> => {
   const collections = mongoose.connection.collections;
 
   for (const key in collections) {
