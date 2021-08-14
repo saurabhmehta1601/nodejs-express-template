@@ -1,24 +1,17 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "target": "ES2021",
-        "strict": true,
-        // "noImplicitAny": true,
-        "moduleResolution": "node",
-        "sourceMap": true,
-        "outDir": "dist",
-        "baseUrl": ".",
-        "paths": {
-            "*": [
-                "node_modules/*",
-                "src/types/*"
-            ],
-        }
-    },
-    "include": [
-        "src/**/*.ts"
-    ],
-    "exclude": ["src/**/*.test.ts"]
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2015",
+    "strict": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "removeComments": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["__tests__", "dist", "node_modules"]
 }
