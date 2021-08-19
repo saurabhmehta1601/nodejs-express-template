@@ -17,14 +17,14 @@ afterAll(async () => {
 describe("crud controller", () => {
   it("creates single document having required fields on schema", async () => {
     const doc = await createOne(User, {
-      email: "test@gmail.com",
+      username: "test@gmail.com",
       password: "test1234",
     });
-    expect(doc.email).toBe("test@gmail.com");
+    expect(doc.username).toBe("test@gmail.com");
   });
   it("deletes doc with given id", async () => {
     const doc = await createOne(User, {
-      email: "test@gmail.com",
+      username: "test@gmail.com",
       password: "test1234",
     });
 
@@ -35,14 +35,14 @@ describe("crud controller", () => {
 
   it("update doc with given id to given payload", async () => {
     const doc = await createOne(User, {
-      email: "test@gmail.com",
+      username: "test@gmail.com",
       password: "test1234",
     });
 
     const updatedDoc = await updateOne(User, doc._id, {
-      email: "changed@gmail.com",
+      username: "changed@gmail.com",
     });
 
-    expect(updatedDoc.email).toBe("changed@gmail.com");
+    expect(updatedDoc.username).toBe("changed@gmail.com");
   });
 });

@@ -1,5 +1,5 @@
 import { verify } from "jsonwebtoken";
 
-export default (userToken: string) => {
-  return verify(userToken, process.env.JWT_SECRET_KEY as string);
+export default (userToken: string, SECRET: string) => {
+  return verify(userToken, SECRET);
 };

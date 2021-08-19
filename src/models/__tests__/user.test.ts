@@ -16,11 +16,11 @@ afterAll(async () => {
 
 describe("user model", () => {
   const testUser = {
-    email: "test@gmail.com",
+    username: "test@1234",
     password: "test1234",
     profile: {
       gender: "Male",
-      name: "test",
+      name: "test@1234",
     },
   };
 
@@ -29,11 +29,14 @@ describe("user model", () => {
     expect(newUser.password).not.toBe(testUser.password);
   });
 
-  it(" does not create user with duplicate email", async () => {
+  it(" does not create user with duplicate usernameame", async () => {
     let err;
     try {
       await createOne(User, testUser);
-      await createOne(User, { email: "test@gmail.com", password: "password" });
+      await createOne(User, {
+        username: "test@1234",
+        password: "password",
+      });
     } catch (error) {
       err = error;
     }
@@ -43,6 +46,22 @@ describe("user model", () => {
   it("successfully creates and fetches user ", async () => {
     const newUser = await createOne(User, testUser);
     const foundUser = await findOne(User, newUser._id);
-    expect(foundUser.email).toBe("test@gmail.com");
+    expect(foundUser.username).toBe("test@1234");
+  });
+  
+  it("do not create user  with username length less than 8", async () => {
+    let err = undefined
+    try{ await createOne(User, {username:"test", password:"test1234"}); }
+    catch(e){ err = e }
+
+    expect(err).not.toBeUndefined()
+  });
+  
+  it("do not create user  with password length less than 8", async () => {
+    let err = undefined
+    try{ await createOne(User, {username:"test@1234", password:"test"}); }
+    catch(e){ err = e }
+
+    expect(err).not.toBeUndefined()
   });
 });

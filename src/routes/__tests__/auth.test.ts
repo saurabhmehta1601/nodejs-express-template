@@ -22,9 +22,9 @@ afterAll(async () => {
 });
 
 describe("POST /auth/register", () => {
-  it("register user with email and password", async () => {
+  it("register user with username and password", async () => {
     const request = supertest(app);
-    const reqBody = { email: "test@gmail.com", password: "password" };
+    const reqBody = { username: "test@1234", password: "password" };
     const res = await request
       .post("/auth/register")
       .set("Content-Type", "application/json")

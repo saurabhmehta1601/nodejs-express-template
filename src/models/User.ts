@@ -2,18 +2,13 @@ import bcrypt from "bcrypt";
 import mongoose from "mongoose";
 import { model, Schema } from "mongoose";
 
-enum Gender {
-  Male = "Male",
-  Female = "Female",
-  Other = "Other",
-}
 
 export type UserDocument = mongoose.Document & {
-  email: string;
+  username: string;
   password: string;
   profile?: {
     name: string;
-    gender: Gender;
+    gender: ["Male","Female","Other"];
   };
   comparePassword: (
     password: string,
@@ -23,14 +18,17 @@ export type UserDocument = mongoose.Document & {
 
 export const userSchema = new Schema<UserDocument>(
   {
-    email: {
+    username: {
       type: String,
+      trim: true, 
+      minLength: [8 , "Username should be at least 8 characters long."], 
       required: true,
-      test: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
       unique: [true, "User with account already exists."],
     },
     password: {
       type: String,
+      trim: true, 
+      minLength: [8 , "Password should be at least 8 characters long."], 
       required: true,
     },
     profile: {
@@ -41,7 +39,7 @@ export const userSchema = new Schema<UserDocument>(
       gender: {
         type: String,
         required: false,
-        enum: Gender,
+        enum: ["Male","Female","Other"],
       },
     },
   },
