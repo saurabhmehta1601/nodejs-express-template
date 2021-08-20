@@ -1,10 +1,11 @@
+import cookieParser from "cookie-parser"
 import { config } from "dotenv";
 import express, { Express } from "express";
 import morgan from "morgan";
 import apiRoutes from "./routes/api";
 import authMiddleware from "./middlewares/auth";
-import authRoutes from "./routes/auth";
 import errorHandler from "./middlewares/errorHandler";
+import authRoutes from "./routes/auth";
 
 config();
 const app: Express = express();
@@ -15,6 +16,7 @@ if (process.env.NODE_ENV !== "production") {
 
 // middlewares
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 // routes

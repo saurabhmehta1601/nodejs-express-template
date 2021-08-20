@@ -13,6 +13,6 @@ export default (req: Request, res: Response, next: NextFunction) => {
     }
     next();
   } else {
-    return res.status(401).end();
+    return res.status(401);
   }
 };

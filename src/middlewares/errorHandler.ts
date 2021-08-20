@@ -1,13 +1,11 @@
-import { Request, Response } from "express";
+import { Request, Response} from "express";
 
-export interface CustomError extends Error {
-  statusCode?: number;
+export interface ICustomError extends Error{
+    statusCode?: number
 }
 
-export default (err: CustomError, req: Request, res: Response) => {
-  const statusCode = err.statusCode || 500;
-  return res.status(statusCode).json({
-    name: err.name,
-    error: err.message,
-  });
+export default ( err: ICustomError , _req: Request, res: Response) => {
+    const statusCode = err.statusCode || 500
+    const {name, message} = err
+    return res.status(statusCode).json({error: {name, message}})
 };

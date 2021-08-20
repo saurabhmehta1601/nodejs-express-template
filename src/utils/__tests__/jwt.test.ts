@@ -1,10 +1,10 @@
-import { IUser, accessToken, refreshToken } from "../genJWT";
+import { IUser, getAccessToken, getRefreshToken } from "../genJWT";
 import verifyJWT from "../verifyJWT";
 
 describe("genJWT and verifyJWT", () => {
   it("encodes and decodes refreshToken", () => {
     const demoUser = { username: "test" };
-    const encryptedJWTUser = refreshToken(demoUser);
+    const encryptedJWTUser = getRefreshToken(demoUser);
 
     const decryptedUser = verifyJWT(
       encryptedJWTUser,
@@ -15,7 +15,7 @@ describe("genJWT and verifyJWT", () => {
 
   it("encodes and decodes accessToken", () => {
     const demoUser = { username: "test" };
-    const encryptedJWTUser = accessToken(demoUser);
+    const encryptedJWTUser = getAccessToken(demoUser);
 
     const decryptedUser = verifyJWT(
       encryptedJWTUser,
