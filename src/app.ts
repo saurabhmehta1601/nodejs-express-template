@@ -4,6 +4,7 @@ import morgan from "morgan";
 import apiRoutes from "./routes/api";
 import authMiddleware from "./middlewares/auth";
 import authRoutes from "./routes/auth";
+import errorHandler from "./middlewares/errorHandler"
 
 config();
 const app: Express = express();
@@ -19,5 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 // routes
 app.use("/auth", authRoutes);
 app.use("/api", authMiddleware, apiRoutes);
+
+app.use(errorHandler); // always put errorHandler at end
 
 export default app;
