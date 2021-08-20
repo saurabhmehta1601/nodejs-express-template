@@ -1,11 +1,13 @@
 import bcrypt from "bcrypt";
 import mongoose from "mongoose";
 import { model, Schema } from "mongoose";
+import {getRefreshToken} from "../utils/genJWT"
 
 
 export type UserDocument = mongoose.Document & {
   username: string;
   password: string;
+  refreshToken: string;
   profile?: {
     name: string;
     gender: ["Male","Female","Other"];
@@ -31,6 +33,11 @@ export const userSchema = new Schema<UserDocument>(
       minLength: [8 , "Password should be at least 8 characters long."], 
       required: true,
     },
+    refreshToken: {
+      type: String,
+      trim: true, 
+      required: true,
+    },
     profile: {
       name: {
         type: String,
@@ -54,7 +61,8 @@ userSchema.pre("save", function save(next) {
     if (err) {
       return next(err);
     }
-    this.password = hash;
+    this.password = hash
+    this.refreshToken = getRefreshToken({username: this.username})
     next();
   });
 });

@@ -7,14 +7,13 @@ export interface IUser {
  * @param username
  * @returns jsonwentoken
  */
-// eslint-disable-next-line
-export const refreshToken = (payload: {}) => {
+export const getRefreshToken = (payload: IUser) => {
   return sign(payload, process.env.JWT_REFRESH_TOKEN_SECRET as string, {
     expiresIn: "90d",
   });
 };
 
-export const accessToken= (payload: {}) => {
+export const getAccessToken= (payload: IUser) => {
   return sign(payload, process.env.JWT_ACCESS_TOKEN_SECRET as string, {
     expiresIn: 60*15,
   });
