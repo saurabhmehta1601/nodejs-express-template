@@ -20,7 +20,7 @@ export const register = async (
     const user = await User.findOne({ username }).lean().exec();
     if (user) {
       const err: ICustomError = new Error("Username already taken");
-      err.statusCode = 400;
+      err.statusCode = 401;
       return next(err);
     }
 

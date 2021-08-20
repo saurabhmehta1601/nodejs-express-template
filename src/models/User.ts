@@ -6,7 +6,7 @@ import { getRefreshToken } from "../utils/genJWT";
 export type UserDocument = mongoose.Document & {
   username: string;
   password: string;
-  refreshToken: string;
+  refreshToken?: string;
   profile?: {
     name: string;
     gender: ["Male", "Female", "Other"];
@@ -35,7 +35,7 @@ export const userSchema = new Schema<UserDocument>(
     refreshToken: {
       type: String,
       trim: true,
-      required: true,
+      required: false,
     },
     profile: {
       name: {
