@@ -30,6 +30,6 @@ describe("POST /auth/register", () => {
       .set("Content-Type", "application/json")
       .send(reqBody);
     expect(res.status).toBe(201);
-    expect(res.body.accessToken).toBeDefined();
+    expect(res.body.data.accessToken).toBeDefined();
   });
 });
