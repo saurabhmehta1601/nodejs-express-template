@@ -1,8 +1,7 @@
 import bcrypt from "bcrypt";
 import mongoose from "mongoose";
 import { model, Schema } from "mongoose";
-import {getRefreshToken} from "../utils/genJWT"
-
+import { getRefreshToken } from "../utils/genJWT";
 
 export type UserDocument = mongoose.Document & {
   username: string;
@@ -10,7 +9,7 @@ export type UserDocument = mongoose.Document & {
   refreshToken: string;
   profile?: {
     name: string;
-    gender: ["Male","Female","Other"];
+    gender: ["Male", "Female", "Other"];
   };
   comparePassword: (
     password: string,
@@ -22,20 +21,20 @@ export const userSchema = new Schema<UserDocument>(
   {
     username: {
       type: String,
-      trim: true, 
-      minLength: [8 , "Username should be at least 8 characters long."], 
+      trim: true,
+      minLength: [8, "Username should be at least 8 characters long."],
       required: true,
       unique: [true, "User with account already exists."],
     },
     password: {
       type: String,
-      trim: true, 
-      minLength: [8 , "Password should be at least 8 characters long."], 
+      trim: true,
+      minLength: [8, "Password should be at least 8 characters long."],
       required: true,
     },
     refreshToken: {
       type: String,
-      trim: true, 
+      trim: true,
       required: true,
     },
     profile: {
@@ -46,7 +45,7 @@ export const userSchema = new Schema<UserDocument>(
       gender: {
         type: String,
         required: false,
-        enum: ["Male","Female","Other"],
+        enum: ["Male", "Female", "Other"],
       },
     },
   },
@@ -61,8 +60,8 @@ userSchema.pre("save", function save(next) {
     if (err) {
       return next(err);
     }
-    this.password = hash
-    this.refreshToken = getRefreshToken({username: this.username})
+    this.password = hash;
+    this.refreshToken = getRefreshToken({ username: this.username });
     next();
   });
 });

@@ -4,7 +4,7 @@ import morgan from "morgan";
 import apiRoutes from "./routes/api";
 import authMiddleware from "./middlewares/auth";
 import authRoutes from "./routes/auth";
-import errorHandler from "./middlewares/errorHandler"
+import errorHandler from "./middlewares/errorHandler";
 
 config();
 const app: Express = express();

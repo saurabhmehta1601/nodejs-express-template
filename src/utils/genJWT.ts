@@ -13,8 +13,8 @@ export const getRefreshToken = (payload: IUser) => {
   });
 };
 
-export const getAccessToken= (payload: IUser) => {
+export const getAccessToken = (payload: IUser) => {
   return sign(payload, process.env.JWT_ACCESS_TOKEN_SECRET as string, {
-    expiresIn: 60*15,
+    expiresIn: 60 * 15,
   });
 };

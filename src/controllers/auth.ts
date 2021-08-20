@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import {accessToken} from "../utils/genJWT";
+import { accessToken } from "../utils/genJWT";
 import User from "../models/User";
 import { createOne } from "./crud";
 
